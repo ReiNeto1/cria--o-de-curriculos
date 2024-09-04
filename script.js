@@ -25,6 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aplica a formatação ao campo de telefone
     document.getElementById('phone').addEventListener('input', formatPhone);
 
+    // Pré-visualizar imagem de perfil ao selecionar
+    photoInput.addEventListener('change', function(event) {
+        if (photoInput.files && photoInput.files[0]) {
+            const photo = photoInput.files[0];
+            photoURL = URL.createObjectURL(photo);
+            const imagePreview = document.createElement('img');
+            imagePreview.src = photoURL;
+            imagePreview.alt = "Foto do Currículo";
+            imagePreview.style.maxWidth = '150px';
+            imagePreview.style.borderRadius = '50%';
+
+            // Adicionar a imagem à pré-visualização
+            const photoContainer = document.querySelector('.photo-container');
+            photoContainer.innerHTML = '';  // Limpa qualquer imagem anterior
+            photoContainer.appendChild(imagePreview);
+        }
+    });
+
     // Event Listener para submissão do formulário
     resumeForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -39,13 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const languages = document.getElementById('languages').value.trim();
         const activities = document.getElementById('activities').value.trim();
 
-        // Captura e gera o URL da foto
-        if (photoInput.files && photoInput.files[0]) {
-            const photo = photoInput.files[0];
-            photoURL = URL.createObjectURL(photo);
-        }
-
-        // Captura das experiências profissionais (exemplo)
+        // Captura das experiências profissionais
         const experienceEntries = document.querySelectorAll('.experience-entry');
         const experience = Array.from(experienceEntries).map(entry => {
             const jobTitle = entry.querySelector('.job-title').value.trim();
@@ -76,7 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>Email: ${email}</p>
                         <p>LinkedIn: ${linkedin}</p>
                     </div>
-                    ${photoURL ? `<div class="photo-container"><img src="${photoURL}" alt="Foto do Currículo"></div>` : ''}
+                    <div class="photo-container">
+                        ${photoURL ? `<img src="${photoURL}" alt="Foto do Currículo" style="max-width: 150px; border-radius: 50%;">` : ''}
+                    </div>
                 </div>
                 ${summary ? `<hr><section><h3>Resumo Profissional</h3><p>${summary}</p></section>` : ''}
                 ${skills ? `<hr><section><h3>Habilidades</h3><p>${skills}</p></section>` : ''}
