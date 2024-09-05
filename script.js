@@ -36,9 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
             imagePreview.style.maxWidth = '150px';
             imagePreview.style.borderRadius = '50%';
 
-            // Adicionar a imagem à pré-visualização
-            const photoContainer = document.querySelector('.photo-container');
-            photoContainer.innerHTML = '';  // Limpa qualquer imagem anterior
+            // Verifica se o container existe
+            let photoContainer = document.querySelector('.photo-container');
+            if (!photoContainer) {
+                // Cria o container se ele não existir
+                photoContainer = document.createElement('div');
+                photoContainer.classList.add('photo-container');
+                resumePreview.appendChild(photoContainer);
+            }
+
+            // Limpa qualquer imagem anterior
+            photoContainer.innerHTML = '';
+            // Adiciona a nova imagem
             photoContainer.appendChild(imagePreview);
         }
     });
@@ -104,6 +113,41 @@ document.addEventListener('DOMContentLoaded', function() {
         if (photoURL) {
             URL.revokeObjectURL(photoURL);
         }
+    });
+
+    // Função para adicionar novas entradas e limpá-las
+    function addEntry(containerId, templateClass) {
+        const container = document.getElementById(containerId);
+        const template = document.querySelector(`.${templateClass}`).cloneNode(true);
+
+        // Limpa os valores dos inputs e textareas
+        const inputs = template.querySelectorAll('input');
+        inputs.forEach(input => input.value = '');
+
+        const textareas = template.querySelectorAll('textarea');
+        textareas.forEach(textarea => textarea.value = '');
+
+        container.appendChild(template);
+    }
+
+    // Adicionar Experiência
+    document.getElementById('addExperience').addEventListener('click', function() {
+        addEntry('experienceContainer', 'experience-entry');
+    });
+
+    // Adicionar Educação
+    document.getElementById('addEducation').addEventListener('click', function() {
+        addEntry('educationContainer', 'education-entry');
+    });
+
+    // Adicionar Projeto
+    document.getElementById('addProject').addEventListener('click', function() {
+        addEntry('projectsContainer', 'project-entry');
+    });
+
+    // Adicionar Certificação
+    document.getElementById('addCertification').addEventListener('click', function() {
+        addEntry('certificationsContainer', 'certification-entry');
     });
 
     // Download do currículo em PDF
