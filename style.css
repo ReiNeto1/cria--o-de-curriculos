@@ -126,22 +126,6 @@ button:hover {
     margin: 5px 0;
 }
 
-/*Footer*/
-footer {
-    background-color: #2a3eb1;
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-family: "Playwrite PE", cursive;
-  }
-
-  footer p {
-    margin: 0;
-  }
-
 @media (max-width: 768px) {
     main {
         width: 100%;
