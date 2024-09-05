@@ -10,6 +10,9 @@ Este é um projeto de Criador de Currículos, que permite aos usuários criar, v
 - **Download**: Baixe o currículo gerado em PDF ou Word.
 - **Adição Dinâmica**: Adicione várias experiências, educações, projetos e certificações.
 
+## Leyout.lua
+ Mostra como vai ficar o modelo do Currículo
+
 ## Como Usar
 
 1. **Preencha as Informações**: Insira os dados nas seções disponíveis.
