@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+PE:wght@100..400&display=swap');
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -15,6 +17,10 @@ header {
 h1 {
     margin: 0;
     font-size: 2rem;
+    font-family: "Playwrite PE", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 main {
@@ -71,6 +77,7 @@ button:hover {
     margin-top: 20px;
 }
 
+/**/
 #resumePreview {
     margin-top: 20px;
     padding: 20px;
@@ -79,12 +86,13 @@ button:hover {
     border-radius: 5px;
 }
 
+/*Imagem da Previa*/
 #resumePreview img {
     max-width: 150px;
     border-radius: 50%;
     float: right;
     margin-right: 50px; 
-    margin-top: 0; /* Corrigido para alinhar corretamente a imagem */
+    margin-top: -180px; 
 }
 
 #resumePreview h2 {
@@ -117,6 +125,22 @@ button:hover {
 .section-content p {
     margin: 5px 0;
 }
+
+/*Footer*/
+footer {
+    background-color: #2a3eb1;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: "Playwrite PE", cursive;
+  }
+
+  footer p {
+    margin: 0;
+  }
 
 @media (max-width: 768px) {
     main {

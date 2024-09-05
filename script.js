@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para formatar o telefone
     function formatPhone(event) {
         let input = event.target;
-        let value = input.value.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
+        let value = input.value.replace(/\D/g, '');  
 
         if (value.length > 10) {
             value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Adicionar a imagem à pré-visualização
             const photoContainer = document.querySelector('.photo-container');
-            photoContainer.innerHTML = '';  // Limpa qualquer imagem anterior
+            photoContainer.innerHTML = '';  
             photoContainer.appendChild(imagePreview);
         }
     });
