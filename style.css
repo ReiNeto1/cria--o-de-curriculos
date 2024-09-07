@@ -89,16 +89,14 @@ button:hover {
 /*Imagem da Previa*/
 /* Estilo para imagem de prévia no formato 3x4 */
 #resumePreview img {
-    width: 1250px;  /* Largura 3 */
-    height: 190px; /* Altura 4 */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    width: 1250px;  
+    height: 190px; 
+    object-fit: cover; 
     float: right;
     margin-right: 50px;
     margin-top: -160px;
-    border-radius: 0; /* Remove o arredondamento */
+    border-radius: 0; 
 }
-
-
 
 #resumePreview h2 {
     margin-top: 0;
