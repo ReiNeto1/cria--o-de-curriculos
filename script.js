@@ -150,6 +150,16 @@ document.addEventListener('DOMContentLoaded', function() {
         addEntry('certificationsContainer', 'certification-entry');
     });
 
+    // Função para remover entrada
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-button')) {
+            const entry = event.target.closest('.experience-entry, .education-entry, .project-entry, .certification-entry');
+            if (entry) {
+                entry.remove();
+            }
+        }
+    });
+
     // Download do currículo em PDF
     document.getElementById('downloadPdf').addEventListener('click', function() {
         const element = resumePreview;
