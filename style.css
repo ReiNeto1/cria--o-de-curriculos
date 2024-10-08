@@ -176,3 +176,59 @@ footer {
     margin-top: 5px;
     color: red;
 }
+
+/* Estilo para os ícones e cards de informação */
+.info-card {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.info-card i {
+    color: #007BFF;
+    font-size: 1rem;
+}
+
+/* Tooltip que aparece no hover ou no clique */
+.info-card::after {
+    content: attr(data-text);
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+    font-size: 0.9rem;
+    z-index: 10;
+    white-space: normal;
+}
+
+.info-card:hover::after, .info-card:focus::after {
+    display: block;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .info-card::after {
+        width: 90%;
+        left: 5%;
+        transform: none;
+    }
+}
