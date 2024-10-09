@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+PE:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..400&family=Playfair+Display:wght@400&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -17,7 +17,7 @@ header {
 h1 {
     margin: 0;
     font-size: 2rem;
-    font-family: "Playwrite PE", cursive;
+    font-family: 'Playfair Display', cursive;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -77,38 +77,23 @@ button:hover {
     margin-top: 20px;
 }
 
-/**/
 #resumePreview {
     margin-top: 20px;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-/*Imagem da Previa*/
-#resumePreview {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    position: relative; /* Para que o filho posicionado seja relativo a este contêiner */
+    position: relative;
 }
 
 #resumePreview img {
-    width: 150px; /* Define a largura da imagem */
-    height: 200px; /* Define a altura da imagem para criar o efeito 3x4 */
-    object-fit: cover; /* Garante que a imagem cubra o espaço definido */
-    position: absolute; /* Posiciona a imagem de forma absoluta */
-    top: 20px; /* Distância do topo do contêiner */
-    right: 20px; /* Distância do lado direito do contêiner */
-    border: 1px solid #ddd; /* Opcional: borda ao redor da imagem */
-}
-
-
-#resumePreview h2 {
-    margin-top: 0;
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #ddd;
 }
 
 #resumePreview h2 {
@@ -131,68 +116,22 @@ button:hover {
     margin-top: 20px;
 }
 
-/* Estilo para as divisões entre seções */
-.section-divider {
-    border-top: 1px solid #000;
-    margin: 20px 0;
-}
-
-/* Geral para o conteúdo das seções */
-.section-content p {
-    margin: 5px 0;
-}
-
-/*Footer*/
-footer {
-    background-color: #2a3eb1;
-    color: white;
-    text-align: center;
-    padding: 3px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-family: "Playwrite PE", cursive;
-  }
-
-  footer p {
-    margin: 0;
-  }
-
-@media (max-width: 768px) {
-    main {
-        width: 100%;
-        padding: 15px;
-    }
-
-    input#phone {
-        width: calc(100% - 10px);
-    }
-}
-
-/*Mensagem de Erro*/
-
-.error-message {
-    font-size: 0.9rem;
-    margin-top: 5px;
-    color: red;
-}
-
 /* Estilo para os ícones e cards de informação */
 .info-card {
     position: relative;
     cursor: pointer;
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 20px;
+    vertical-align: middle;
 }
 
 .info-card i {
-    color: #007BFF;
+    color: #000000;
     font-size: 1rem;
 }
 
 /* Tooltip que aparece no hover ou no clique */
-.info-card::after {
-    content: attr(data-text);
+.tooltip {
     display: none;
     position: absolute;
     top: 100%;
@@ -202,33 +141,83 @@ footer {
     color: white;
     padding: 10px;
     border-radius: 5px;
-    width: 250px;
+    width: 300px; /* Largura fixa para garantir que tenha espaço */
     text-align: center;
     font-size: 0.9rem;
     z-index: 10;
-    white-space: normal;
+    white-space: normal; /* Permite quebra de linha */
+    word-wrap: break-word; /* Garante que palavras longas sejam quebradas */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.info-card:hover::after, .info-card:focus::after {
-    display: block;
-}
-
-.info-card::before {
-    content: '';
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: #333 transparent transparent transparent;
-}
-
-/* Ajustes para mobile */
+/* Responsividade para mobile */
 @media (max-width: 768px) {
-    .info-card::after {
-        width: 90%;
-        left: 5%;
-        transform: none;
+    /* Ajuste de largura dos cards */
+    .info-card {
+        width: 90vw; /* Card ocupa 90% da largura da tela */
+        margin-bottom: 15px; /* Espaçamento entre os cards */
+    }
+
+    /* Formulário responsivo */
+    form {
+        width: 95vw; /* Largura do formulário ajustada à tela */
+    }
+
+    /* Espaçamento entre botões */
+    .buttons-container button {
+        display: block;
+        width: 100%; /* Botões ocupam 100% da largura do container */
+        margin: 10px 0; /* Espaçamento entre os botões */
     }
 }
+
+.tooltip {
+    display: none; /* Oculta o tooltip por padrão */
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 100;
+    width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.info-card:hover .tooltip {
+    display: block; /* Exibe o tooltip ao passar o mouse */
+}
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Para telas maiores, o tamanho é ajustado */
+@media (min-width: 769px) {
+    .info-card {
+        width: 400px; /* Card com tamanho fixo em telas maiores */
+        margin-bottom: 20px; /* Espaçamento entre os cards */
+    }
+
+    .buttons-container button {
+        margin: 0 5px; /* Espaçamento horizontal entre botões */
+    }
+}
+
+
+
+footer {
+    background-color: #2a3eb1;
+    color: white;
+    text-align: center;
+    padding: 3px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: "Playfair Display", cursive;
+}
+
+footer p {
+    margin: 0;
+}
+
