@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const resumeForm = document.getElementById('resumeForm');
     const photoInput = document.getElementById('photo');
     const resumePreview = document.getElementById('resumePreview');
-    let photoURL = ''; 
+    let photoURL = '';
 
-    // Captura da imagem selecionada sem exibir ainda
+    // Captura da imagem selecionada
     photoInput.addEventListener('change', function (event) {
         if (photoInput.files && photoInput.files[0]) {
             const photo = photoInput.files[0];
-            photoURL = URL.createObjectURL(photo); 
+            photoURL = URL.createObjectURL(photo);
         }
     });
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Validação de formulário
+    // Validação de formulário e exibição do currículo
     resumeForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })),
             languages: document.getElementById('languages').value,
             activities: document.getElementById('activities').value,
-            photo: photoURL // Adiciona a URL da foto
+            photo: photoURL
         };
 
         // Exibir a pré-visualização do currículo
@@ -178,60 +178,14 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-    function displayResumePreview(data) {
-        resumePreview.innerHTML = `
-            <h2>${data.name}</h2>
-            ${data.photo ? `<img src="${data.photo}" alt="Foto" style="width: 150px; height: auto;">` : ''}
-            <p><strong>Nome:</strong> ${data.name}</p>
-            <p><strong>Endereço:</strong> ${data.address}</p>
-            <p><strong>Contatos:</strong> ${data.phone1}${data.phone2 ? ` / ${data.phone2}` : ''}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>LinkedIn:</strong> ${data.linkedin}</p>
-            ${data.summary ? `<h3>Resumo</h3><p>${data.summary}</p>` : ''}
-            ${data.education.length > 0 ? `
-                <h3>Educação</h3>
-                <ul>${data.education.map(edu => `<li>${edu.title} - ${edu.institution} (${edu.duration})</li>`).join('')}</ul>
-            ` : ''}
-            ${data.experience.length > 0 ? `
-                <h3>Experiência</h3>
-                <ul>${data.experience.map(exp => `<li>${exp.title} - ${exp.company} (${exp.duration})<br>${exp.description}</li>`).join('')}</ul>
-            ` : ''}
-            ${data.skills ? `<h3>Habilidades</h3><p>${data.skills}</p>` : ''}
-            ${data.projects.length > 0 ? `
-                <h3>Projetos</h3>
-                <ul>${data.projects.map(proj => `<li>${proj.name} - ${proj.link ? `<a href="${proj.link}">Link</a>` : ''}<br>${proj.description}</li>`).join('')}</ul>
-            ` : ''}
-            ${data.certifications.length > 0 ? `
-                <h3>Certificações</h3>
-                <ul>${data.certifications.map(cert => `<li>${cert.name} - ${cert.institution}<br>${cert.description}</li>`).join('')}</ul>
-            ` : ''}
-            ${data.languages ? `<h3>Idiomas</h3><p>${data.languages}</p>` : ''}
-            ${data.activities ? `<h3>Atividades Extracurriculares</h3><p>${data.activities}</p>` : ''}
-        `;
-    }
-
-    // Lógica para baixar o currículo em PDF ou Word
+    // Lógica para baixar o currículo em PDF ou Word (placeholder)
     document.getElementById('downloadPdf').addEventListener('click', function () {
-        // Implementar a lógica para download em PDF
         alert("Função de download em PDF ainda não implementada.");
     });
 
     document.getElementById('downloadWord').addEventListener('click', function () {
-        // Implementar a lógica para download em Word
         alert("Função de download em Word ainda não implementada.");
     });
 
-    
-});
-
-// Service worker registration
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js').then(registration => {
-        console.log('ServiceWorker registration successful: ', registration);
-      }).catch(error => {
-        console.error('ServiceWorker registration failed: ', error);
-      });
-    });
-  }
   
+});
