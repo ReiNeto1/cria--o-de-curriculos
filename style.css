@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..400&family=Playfair+Display:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&family=Playfair+Display:wght@400&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 
 header {
@@ -18,9 +18,7 @@ h1 {
     margin: 0;
     font-size: 2rem;
     font-family: 'Playfair Display', cursive;
-    font-optical-sizing: auto;
     font-weight: 400;
-    font-style: normal;
 }
 
 main {
@@ -42,7 +40,7 @@ label {
     font-weight: bold;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -73,8 +71,10 @@ button:hover {
 }
 
 .buttons-container {
-    text-align: center;
+    display: flex;
+    gap: 10px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 #resumePreview {
@@ -83,21 +83,79 @@ button:hover {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow: hidden;
 }
 
-#resumePreview img {
-    width: 150px;
+/* Coluna Esquerda */
+.resume-left {
+    flex: 1;
+    background-color: #e8f0fe; /* Cor de fundo personalizada */
+    padding: 20px;
+    border-radius: 5px;
+    border-right: 1px solid #ddd;
+}
+
+.resume-left img {
+    width: 200px;
     height: 200px;
     object-fit: cover;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    border: 1px solid #ddd;
+    border-radius: 50%;
+    margin-bottom: 20px;
 }
 
-#resumePreview h2 {
+.resume-left h2 {
     margin-top: 0;
+    color: #2a3eb1;
+    font-family: 'Playfair Display', cursive;
+}
+
+.resume-left h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    color: #2a3eb1;
+}
+
+.resume-left ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resume-left ul li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* Coluna Direita */
+.resume-right {
+    flex: 2;
+    padding-left: 20px;
+}
+
+.resume-right h2, .resume-right h3 {
+    color: #2a3eb1;
+    font-family: 'Playfair Display', cursive;
+}
+
+.resume-right h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.resume-right ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resume-right ul li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
 }
 
 /* Estilo para informações de contato */
@@ -105,106 +163,29 @@ button:hover {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
-}
-
-/* Estilo para os títulos das seções */
-#resumePreview h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #000;
-    padding-bottom: 5px;
-    margin-top: 20px;
-}
-
-/* Estilo para os ícones e cards de informação */
-.info-card {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    margin-left: 20px;
-    vertical-align: middle;
-}
-
-.info-card i {
-    color: #000000;
-    font-size: 1rem;
+    color: #000;
 }
 
 /* Tooltip que aparece no hover ou no clique */
 .tooltip {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: #333;
-    color: white;
+    color: #fff;
     padding: 10px;
     border-radius: 5px;
-    width: 300px; /* Largura fixa para garantir que tenha espaço */
+    width: 300px;
     text-align: center;
     font-size: 0.9rem;
     z-index: 10;
-    white-space: normal; /* Permite quebra de linha */
-    word-wrap: break-word; /* Garante que palavras longas sejam quebradas */
+    white-space: normal;
+    word-wrap: break-word;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsividade para mobile */
-@media (max-width: 768px) {
-    /* Ajuste de largura dos cards */
-    .info-card {
-        width: 90vw; /* Card ocupa 90% da largura da tela */
-        margin-bottom: 15px; /* Espaçamento entre os cards */
-    }
-
-    /* Formulário responsivo */
-    form {
-        width: 95vw; /* Largura do formulário ajustada à tela */
-    }
-
-    /* Espaçamento entre botões */
-    .buttons-container button {
-        display: block;
-        width: 100%; /* Botões ocupam 100% da largura do container */
-        margin: 10px 0; /* Espaçamento entre os botões */
-    }
-}
-
-.tooltip {
-    display: none; /* Oculta o tooltip por padrão */
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 4px;
-    z-index: 100;
-    width: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-}
 .info-card:hover .tooltip {
-    display: block; /* Exibe o tooltip ao passar o mouse */
+    display: block;
 }
-.buttons-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* Para telas maiores, o tamanho é ajustado */
-@media (min-width: 769px) {
-    .info-card {
-        width: 400px; /* Card com tamanho fixo em telas maiores */
-        margin-bottom: 20px; /* Espaçamento entre os cards */
-    }
-
-    .buttons-container button {
-        margin: 0 5px; /* Espaçamento horizontal entre botões */
-    }
-}
-
-
 
 footer {
     background-color: #2a3eb1;
@@ -214,10 +195,81 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    font-family: "Playfair Display", cursive;
+    font-family: 'Playfair Display', cursive;
 }
 
 footer p {
     margin: 0;
 }
 
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    #resumePreview {
+        flex-direction: column;
+    }
+
+    .resume-left {
+        border-right: none;
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+
+    .resume-right {
+        padding-left: 0;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+    }
+
+    .buttons-container button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Esconde elementos sem valor */
+.resume-left p:empty, .resume-right p:empty, .resume-left ul:empty, .resume-right ul:empty {
+    display: none;
+}
+
+/* Cor personalizada para a coluna de dados pessoais */
+.custom-bg-color {
+    background-color: var(--selected-bg-color, #e8f0fe); /* Cor padrão é azul claro */
+}
+
+/* Layout do currículo para formato A4 ao baixar */
+#resumePreview.a4 {
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Melhoria da escolha de cor */
+#colorPickerSection {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#colorPickerLabel {
+    font-size: 12pt;
+    margin-right: 10px;
+}
+
+#colorPicker {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Ajustes de responsividade e espaçamento em telas menores */
+@media (max-width: 600px) {
+    main {
+        padding: 10px;
+    }
+}
