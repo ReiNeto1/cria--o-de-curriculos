@@ -165,8 +165,14 @@ button:hover {
     line-height: 1.5;
     color: #000;
 }
+/* Estilo para os cards de informação e tooltips */
+.info-card {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
 
-/* Tooltip que aparece no hover ou no clique */
+/* Tooltip corretamente estilizado */
 .tooltip {
     display: none;
     position: absolute;
@@ -174,17 +180,38 @@ button:hover {
     color: #fff;
     padding: 10px;
     border-radius: 5px;
-    width: 300px;
+    width: auto;
+    max-width: 300px;
     text-align: center;
     font-size: 0.9rem;
     z-index: 10;
     white-space: normal;
-    word-wrap: break-word;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    top: 100%;  /* Exibe abaixo do ícone */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/* Exibir o tooltip ao passar o mouse sobre o ícone */
 .info-card:hover .tooltip {
     display: block;
+}
+
+
+.info-card i {
+    color: #030303;
+    margin-left: 5px;
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
 }
 
 footer {

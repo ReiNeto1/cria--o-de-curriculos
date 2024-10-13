@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
@@ -14,14 +15,13 @@
         <h1>Currículo Fácil <i class="fa-solid fa-sheet-plastic"></i></h1>
     </header>
     <main>
-          <!-- Informações Pessoais -->
         <form id="resumeForm">
             <section>
                 <h2>Informações Pessoais <i class="fa-regular fa-user"></i></h2>
                 <label for="name">Nome Completo</label>
                 <input type="text" id="name" placeholder="Nome Completo" required>
-                <label for="address">Endereço</label>
-                <input type="text" id="address" placeholder="Endereço">
+                <label for="address">Endereço: Logradouro, Numero, Ceep, Complementos</label>
+                <input type="text" id="address" placeholder="Endereço: Logradouro, Numero, Ceep, Complementos">
                 <label for="phone1">Telefone 1</label>
                 <input type="tel" id="phone1" placeholder="(00) 00000-0000" required>
                 <label for="phone2">Telefone 2</label>
@@ -118,16 +118,13 @@
                 <textarea id="activities" placeholder="Exemplo: Voluntariado, Hobbies, Grupos de Estudos..."></textarea>
             </section>
 
-    
-               <!-- Botões -->
             <div class="buttons-container">
                 <button type="submit">Gerar Currículo</button>
-                <button type="button" id="downloadPdf">Baixar em PDF</button>
+                <button id="downloadPdf">Baixar em PDF</button>
                 <button type="button" id="downloadWord">Baixar em Word</button>
             </div>
-
-          
         </form>
+
         <div id="resumePreview">
             <!-- Conteúdo será gerado pelo JavaScript -->
         </div>
@@ -137,3 +134,10 @@
     </footer>
 </body>
 </html>
+
+<!--
+Melhoria sugerida:
+Melhorar o estilo das dicas de ferramentas : Você pode adicionar uma animação suave de fade-in para dicas de ferramentas no CSS.
+Responsabilidade : Verifique a responsabilidade para garantir que o layout funcione bem em diferentes tamanhos de tela.
+Aprimorar a experiência do usuário : Adicione feedback visual como um botão giratório enquanto o PDF é gerado.
+-->
