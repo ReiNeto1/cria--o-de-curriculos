@@ -25,3 +25,17 @@ app.post('/generate', async (req, res) => {
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
 });
+app.post('/generate', async (req, res) => {
+    const { prompt } = req.body;
+
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: `Crie uma descrição de experiência para um currículo com base no seguinte: ${prompt}`,
+            max_tokens: 150,
+        });
+        res.json(response.data.choices[0].text);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao gerar a descrição do currículo' });
+    }
+});
