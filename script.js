@@ -122,6 +122,15 @@ document.addEventListener('DOMContentLoaded', function () {
         colorPickerSection.style.display = 'block'; // Apenas se o seletor de cor for relevante
     });
 
+    /*Tooltop*/
+    document.querySelectorAll('.info-card').forEach(card => {
+        const tooltip = card.querySelector('.tooltip');
+        const text = card.getAttribute('data-text');
+        if (text) {
+            tooltip.textContent = text;  // Preenche o tooltip com o texto do data-text
+        }
+    });
+    
     function displayResumePreview(data) {
         // Gera a visualização do currículo
         resumePreview.innerHTML = `
@@ -155,4 +164,92 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
     }
+                    
+            
+                    //Download em PDF e Word
+                document.getElementById('downloadPdf').addEventListener('click', function () {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                
+                    // Captura o elemento resumePreview
+                    const resumePreview = document.getElementById('resumePreview');
+                
+                    // Usar html2canvas para capturar o conteúdo
+                    html2canvas(resumePreview).then(canvas => {
+                        const imgData = canvas.toDataURL('image/png');
+                        const imgWidth = 190;  // Ajuste a largura da imagem no PDF
+                        const pageHeight = 295; // Altura padrão de uma página A4
+                        const imgHeight = canvas.height * imgWidth / canvas.width;
+                        let heightLeft = imgHeight;
+                
+                        let position = 10; // Posição inicial do conteúdo no PDF
+                
+                        // Adiciona a imagem capturada ao PDF
+                        doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                
+                        // Se o conteúdo ultrapassar uma página, adiciona novas páginas
+                        while (heightLeft >= 0) {
+                            position = heightLeft - imgHeight;
+                            doc.addPage();
+                            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+                
+                        doc.save('curriculo.pdf');
+                    });
+                });
+
+                document.getElementById('downloadWord').addEventListener('click', function () {
+                    const content = document.getElementById('resumePreview').outerHTML;
+                    const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
+                
+                    // Cria um link para o download
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'curriculo.doc';  // Nome do arquivo Word
+                    document.body.appendChild(link);
+                
+                    link.click(); // Simula o clique para baixar o arquivo
+                    document.body.removeChild(link); // Remove o link após o download
+                });
+                
+                //spinner
+                document.getElementById('downloadPdf').addEventListener('click', function () {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    const resumePreview = document.getElementById('resumePreview');
+                    const spinner = document.getElementById('spinner'); // Seleciona o spinner
+                
+                    // Exibe o spinner enquanto o PDF é gerado
+                    spinner.style.display = 'block';
+                
+                    html2canvas(resumePreview).then(canvas => {
+                        const imgData = canvas.toDataURL('image/png');
+                        const imgWidth = 190;
+                        const pageHeight = 295;
+                        const imgHeight = canvas.height * imgWidth / canvas.width;
+                        let heightLeft = imgHeight;
+                        let position = 10;
+                
+                        doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                
+                        while (heightLeft >= 0) {
+                            position = heightLeft - imgHeight;
+                            doc.addPage();
+                            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                            heightLeft -= pageHeight;
+                        }
+                
+                        doc.save('curriculo.pdf');
+                
+                        // Oculta o spinner após o download do PDF
+                        spinner.style.display = 'none';
+                    }).catch(err => {
+                        console.error(err);
+                        spinner.style.display = 'none'; // Oculta o spinner mesmo se houver erro
+                    });
+                });
+                
 });
