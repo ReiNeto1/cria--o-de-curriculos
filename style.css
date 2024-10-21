@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
+    
 }
 
 header {
@@ -77,30 +78,42 @@ button:hover {
     justify-content: center;
 }
 
+.custom-bg-color {
+    background-color: var(--selected-bg-color, #e8f0fe); /* Azul claro padrão */
+    color: var(--text-color, #000); /* Garante contraste com o fundo */
+}
+
+
 #resumePreview {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 210mm;  /* Largura A4 */
+    height: 297mm; /* Altura A4 */
+    padding: 2mm; /* Mesma margem usada no PDF */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px auto 0 auto;  /* Reduz a margem superior para 10px e centraliza o layout */
+    overflow: auto;
     display: flex;
     flex-direction: row;
     gap: 20px;
-    overflow: hidden;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Garante que padding seja incluído no tamanho total */
+    overflow-y:auto ;
 }
 
 /* Coluna Esquerda */
 .resume-left {
-    flex: 1;
-    background-color: #e8f0fe; /* Cor de fundo personalizada */
+    flex: 0 0 200px; /* Define uma largura fixa de 200px */
+    max-width: 200px; /* Limita a largura máxima da coluna esquerda */
     padding: 20px;
-    border-radius: 5px;
+    background-color: #e8f0fe;
     border-right: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    overflow: hidden; /* Impede que o conteúdo da coluna esquerda transborde */
 }
 
 .resume-left img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 20px;
@@ -109,13 +122,13 @@ button:hover {
 .resume-left h2 {
     margin-top: 0;
     color: #2a3eb1;
-    font-family: 'Playfair Display', cursive;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .resume-left h3 {
     font-size: 1.2rem;
     margin-bottom: 5px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ffffff;
     padding-bottom: 5px;
     color: #2a3eb1;
 }
@@ -130,15 +143,39 @@ button:hover {
     font-size: 0.95rem;
 }
 
+/* Estilo para o resumo na coluna esquerda */
+.resume-left .summary {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    font-size: 1rem;
+    max-height: 150px; /* Limita a altura máxima do resumo */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+    white-space: normal; /* Permite que o texto quebre em múltiplas linhas */
+    word-wrap: break-word; /* Garante que palavras longas quebrem para se ajustar à largura */
+}
+
+.invalid-summary {
+    border: 1px solid red; /* Altera a borda para vermelho se o resumo for inválido */
+}
+
+#summaryCounter {
+    margin-top: 5px; /* Espaço entre o resumo e o contador */
+    font-size: 0.9rem; /* Tamanho da fonte do contador */
+    color: #666; /* Cor do texto */
+}
+
 /* Coluna Direita */
 .resume-right {
-    flex: 2;
-    padding-left: 20px;
+    flex: 1; /* Permite que a coluna direita se ajuste ao espaço restante */
+    padding: 20px;
+    border-radius: 0 25px 25px 0;
+    overflow-y: auto; /* Adiciona rolagem caso o conteúdo seja muito longo */
 }
 
 .resume-right h2, .resume-right h3 {
     color: #2a3eb1;
-    font-family: 'Playfair Display', cursive;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .resume-right h3 {
@@ -158,6 +195,12 @@ button:hover {
     font-size: 0.95rem;
 }
 
+.resume-right, .resume-left {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+
 /* Estilo para informações de contato */
 .contact-info p {
     margin: 0;
@@ -170,6 +213,7 @@ button:hover {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    
 }
 
 /* Tooltip corretamente estilizado */
@@ -182,22 +226,23 @@ button:hover {
     border-radius: 5px;
     width: auto;
     max-width: 300px;
-    min-width: 250px; /* Define uma largura mínima */
-    min-height: 50px;  /* Define uma altura mínima */
+    min-width: 250px;
+    min-height: 50px;
     text-align: center;
     font-size: 1rem;
-    z-index: 1000;
+    z-index: 2000; /* Aumente o z-index */
     white-space: normal;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    top: 100%;  /* Exibe abaixo do ícone */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    transition: opacity 0.3s ease-in-out;
 }
-
 
 /* Exibir o tooltip ao passar o mouse sobre o ícone */
 .info-card:hover .tooltip {
     display: block;
+    opacity: 1;
 }
 
 
@@ -217,6 +262,13 @@ button:hover {
     border-color: transparent transparent #333 transparent;
 }
 
+.info-card:hover .tooltip {
+    z-index: 9999;
+    display: block;
+    opacity: 1;
+}
+
+
 footer {
     background-color: #2a3eb1;
     color: white;
@@ -233,28 +285,31 @@ footer p {
 }
 
 /* Responsividade para mobile */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    main {
+        width: 100%;
+        padding: 10px;
+    }
+
     #resumePreview {
-        flex-direction: column;
+        width: 100%;
+        padding: 5px;
     }
 
     .resume-left, .resume-right {
         padding: 10px;
-        border: none;
-    }
-
-    .buttons-container {
-        flex-direction: column;
-    }
-
-    .buttons-container button {
-        width: 100%;
-        margin: 5px 0;
     }
 
     /* Ajustar o tamanho das tooltips para telas menores */
     .tooltip {
         max-width: 90%;
+    }
+}
+@media (max-width: 600px) {
+    .tooltip {
+        max-width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -268,17 +323,18 @@ footer p {
 .custom-bg-color {
     background-color: var(--selected-bg-color, #e8f0fe); /* Cor padrão é azul claro */
 }
-
 /* Layout do currículo para formato A4 ao baixar */
 #resumePreview.a4 {
-    width: 210mm;
-    height: 297mm;
-    padding: 20mm;
+    width: 210mm;  /* Largura A4 */
+    height: 297mm; /* Altura A4 */
+    padding: 2mm;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;  /* Reduz a margem superior */
 }
 
-/* Melhoria da escolha de cor */
+
+
 #colorPickerSection {
     margin-top: 20px;
     text-align: center;
@@ -298,9 +354,11 @@ footer p {
     cursor: pointer;
 }
 
-/* Ajustes de responsividade e espaçamento em telas menores */
 @media (max-width: 600px) {
-    main {
-        padding: 10px;
+    .tooltip {
+        max-width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
+

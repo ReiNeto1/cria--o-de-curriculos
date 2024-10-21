@@ -20,11 +20,11 @@
                 <h2>Informações Pessoais <i class="fa-regular fa-user"></i></h2>
                 <label for="name">Nome Completo</label>
                 <input type="text" id="name" placeholder="Nome Completo" required>
-                <label for="address">Endereço: Logradouro, Numero, Cep, Complementos</label>
-                <input type="text" id="address" placeholder="Endereço: Logradouro, Numero, Cep, Complementos">
-                <label for="phone1">Telefone 1</label>
+                <label for="address">Endereço: Logradouro, Número, CEP, Complementos</label>
+                <input type="text" id="address" placeholder="Endereço: Logradouro, Número, CEP, Complementos">
+                <label for="phone1">Telefone</label>
                 <input type="tel" id="phone1" placeholder="(00) 00000-0000" required>
-                <label for="phone2">Telefone 2</label>
+                <label for="phone2">Telefone</label>
                 <input type="tel" id="phone2" placeholder="(00) 00000-0000">
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="Email" required>
@@ -32,21 +32,19 @@
                 <input type="text" id="linkedin" placeholder="LinkedIn">
                 <label for="photo">Foto</label>
                 <input type="file" id="photo" accept="image/*" aria-label="Carregar foto">
-            
-                <h2>Resumo <i class="fa-regular fa-address-card"></i>
-                    <span class="info-card" data-text="Uma breve apresentação de suas qualificações mais relevantes, destacando seus objetivos profissionais e experiência principal.">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        <span class="tooltip"></span>
-                    </span>
-                </h2>
-                <textarea id="summary" class="professional-summary" placeholder="Breve resumo das suas habilidades e experiências mais relevantes."></textarea>
+
+                <div class="summary-container">
+                    <h2>Resumo <i class="fa-regular fa-address-card"></i>
+                        <span class="info-card" data-text="Uma breve apresentação de suas qualificações mais relevantes, destacando seus objetivos profissionais e experiência principal.">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span class="tooltip"></span>
+                        </span>
+                    </h2>
+                    <textarea id="summary" class="professional-summary" placeholder="Breve resumo das suas habilidades e experiências mais relevantes."></textarea>
+                    <div id="summaryCounter" style="font-size: 0.9rem; color: #666;">0 caracteres</div>
+                </div>
             </section>
 
-            </section>
-
-            <section>
-                
-               
             <section>
                 <h2>Educação <i class="fa-solid fa-book"></i>
                     <span class="info-card" data-text="Sua formação acadêmica, incluindo cursos, instituições, datas de conclusão e títulos obtidos.">
@@ -122,32 +120,21 @@
             </section>
 
             <div class="buttons-container">
-                <button type="submit">Gerar Currículo</button>
+                <button type="button" id="generateResumeButton">Gerar Currículo</button>
                 <button id="downloadPdf">Baixar em PDF</button>
                 <button type="button" id="downloadWord">Baixar em Word</button>
             </div>
         </form>
-
-        <div id="resumePreview">
-            <!-- Conteúdo será gerado pelo JavaScript -->
-        </div>
-
-        <!--spinner-->
+        <div id="resumePreview"></div>
         <div class="loading-container" id="spinner" style="display:none;">
             <div class="loading"></div>
         </div>
         
-        
+        <div id="colorPickerSection"></div>
     </main>
     <footer>
         <p>&copy; Currículo Fácil - 2024 Reinaldo Fernandes. Todos os direitos reservados.</p>
     </footer>
 </body>
 </html>
-
-<!--
-Melhoria sugerida:
-Melhorar o estilo das dicas de ferramentas : Você pode adicionar uma animação suave de fade-in para dicas de ferramentas no CSS.
-Responsabilidade : Verifique a responsabilidade para garantir que o layout funcione bem em diferentes tamanhos de tela.
-Aprimorar a experiência do usuário : Adicione feedback visual como um botão giratório enquanto o PDF é gerado.
--->
+caso nesseario de ter uma segunda pagina mostre no previw como esta e crie a segunda pagigina no download
