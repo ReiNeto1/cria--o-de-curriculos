@@ -74,6 +74,38 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `);
 
+        //contador 
+        document.getElementById('summary').addEventListener('input', function() {
+            const summary = document.getElementById('summary');
+            const counter = document.getElementById('summaryCounter');
+            const maxLength = 600;
+            const currentLength = summary.value.length;
+        
+            if (currentLength > maxLength) {
+                summary.value = summary.value.substring(0, maxLength); // Limita a entrada de texto
+            }
+        
+            counter.textContent = `${summary.value.length} / ${maxLength} caracteres`;
+        });
+        
+
+    document.getElementById('skills').addEventListener('input', function() {
+        const skillsText = document.getElementById('skills').value;
+        const skillsDisplay = document.getElementById('skillsDisplay');
+        
+        // Divide as habilidades por vírgula
+        const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
+        
+        // Limpa as habilidades anteriores
+        skillsDisplay.innerHTML = '';
+    
+        // Adiciona cada habilidade como um "tag"
+        skillsArray.forEach(skill => {
+            const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
+
+        });
+    });
+    
     // Função para gerar currículo
     function generateResume() {
         const name = document.getElementById('name').value;
@@ -126,7 +158,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para exibir o preview do currículo
     function displayResumePreview(data) {
-    resumePreview.innerHTML = `
+        resumePreview.innerHTML = `
+            <div class="resume-left custom-bg-color">
+                ${data.photo ? `<img src="${data.photo}" alt="Foto">` : ''}
+                <h2>${data.name}</h2>
+                <div class="contact-info">
+                    ${data.address ? `<p><strong>Endereço:</strong> <span>${data.address}</span></p>` : ''}
+                    <p><strong>Telefone 1:</strong> <span>${data.phone1}</span></p>
+                    ${data.phone2 ? `<p><strong>Telefone 2:</strong> <span>${data.phone2}</span></p>` : ''}
+                    <p><strong>Email:</strong> <span>${data.email}</span></p>
+                    ${data.linkedin ? `<p><strong>LinkedIn:</strong> <span>${data.linkedin}</span></p>` : ''}
+                </div>
+                ${data.skills ? `<div class="skills"><h3>Habilidades</h3><p>${data.skills}</p></div>` : ''}
+            </div>
+            <div class="resume-right">
+                ${data.summary ? `<div class="summary"><h3>Resumo</h3><p>${data.summary}</p></div>` : ''}
+                ${data.education.length ? `<h3>Educação</h3><ul>${data.education.map(edu => `<li>${edu.title} - ${edu.institution} (${edu.duration})</li>`).join('')}</ul>` : ''}
+                ${data.experience.length ? `<h3>Experiência Profissional</h3><ul>${data.experience.map(exp => `<li><strong>${exp.title}</strong> - ${exp.company} (${exp.duration})<br>${exp.description}</li>`).join('')}</ul>` : ''}
+                ${data.projects.length ? `<h3>Projetos</h3><ul>${data.projects.map(proj => `<li><strong>${proj.name}</strong> ${proj.link ? `- <a href="${proj.link}" target="_blank">Link</a>` : ''}<br>${proj.description}</li>`).join('')}</ul>` : ''}
+                ${data.certifications.length ? `<h3>Certificações</h3><ul>${data.certifications.map(cert => `<li><strong>${cert.name}</strong> - ${cert.institution}<br>${cert.description}</li>`).join('')}</ul>` : ''}
+                ${data.languages ? `<h3>Idiomas</h3><p>${data.languages}</p>` : ''}
+                ${data.activities ? `<h3>Atividades Extracurriculares</h3><p>${data.activities}</p>` : ''}
+            </div>
+        `;
+    }
+    
+
+// Função para exibir o preview do currículo e lidar com múltiplas páginas
+function displayResumePreview(data) {
+    const resumePreview = document.getElementById('resumePreview');
+    resumePreview.innerHTML = '';
+
+    // Coluna da esquerda, com dados pessoais
+    const leftColumn = `
         <div class="resume-left custom-bg-color">
             ${data.photo ? `<img src="${data.photo}" alt="Foto">` : ''}
             <h2>${data.name}</h2>
@@ -139,6 +203,10 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             ${data.skills ? `<div class="skills"><h3>Habilidades</h3><p>${data.skills}</p></div>` : ''}
         </div>
+    `;
+
+    // Coluna da direita com conteúdo que pode exceder uma página
+    const rightColumn = `
         <div class="resume-right">
             ${data.summary ? `<div class="summary"><h3>Resumo</h3><p>${data.summary}</p></div>` : ''}
             ${data.education.length ? `<h3>Educação</h3><ul>${data.education.map(edu => `<li>${edu.title} - ${edu.institution} (${edu.duration})</li>`).join('')}</ul>` : ''}
@@ -149,6 +217,25 @@ document.addEventListener('DOMContentLoaded', function () {
             ${data.activities ? `<h3>Atividades Extracurriculares</h3><p>${data.activities}</p>` : ''}
         </div>
     `;
+
+    // Adiciona as duas colunas à primeira página do preview
+    const firstPage = document.createElement('div');
+    firstPage.classList.add('page');
+    firstPage.innerHTML = leftColumn + rightColumn;
+    resumePreview.appendChild(firstPage);
+
+    // Checa se o conteúdo ultrapassa a altura da primeira página
+    if (firstPage.scrollHeight > firstPage.offsetHeight) {
+        const overflowContent = rightColumn;
+        const secondPage = document.createElement('div');
+        secondPage.classList.add('page');
+        secondPage.innerHTML = `
+            <div class="resume-right second-page">${overflowContent}</div>
+        `;
+        resumePreview.appendChild(secondPage);
+    }
+
+    resumePreview.style.display = 'flex'; // Exibe o preview
 }
 
     // Função para baixar currículo como PDF
