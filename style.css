@@ -78,6 +78,23 @@ button:hover {
     justify-content: center;
 }
 
+.skills-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skill-tag {
+    background-color: #e8f0fe;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #2a3eb1;
+    border: 1px solid #ccc;
+}
+
+
 .custom-bg-color {
     background-color: var(--selected-bg-color, #e8f0fe); /* Azul claro padrão */
     color: var(--text-color, #000); /* Garante contraste com o fundo */
