@@ -29,6 +29,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Contador para o campo "Resumo"
+    document.getElementById('summary').addEventListener('input', function () {
+        const summary = document.getElementById('summary');
+        const counter = document.getElementById('summaryCounter');
+        const maxLength = 500;
+        const currentLength = summary.value.length;
+
+        if (currentLength > maxLength) {
+            summary.value = summary.value.substring(0, maxLength);
+        }
+        counter.textContent = `${summary.value.length} / ${maxLength} caracteres`;
+    });
+
     // Exibe o texto do tooltip dinamicamente
     document.querySelectorAll('.info-card').forEach(card => {
         const tooltip = card.querySelector('.tooltip');
@@ -37,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
             tooltip.textContent = text;
         }
     });
-
 
     // Adicionar seções dinâmicas
     addSection('addEducation', 'educationContainer', `
