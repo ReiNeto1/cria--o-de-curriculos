@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('/DALL·E\ 2024-10-26\ 23.08.17\ -\ A\ professional\ background\ for\ a\ resume\ creation\ webpage\ with\ a\ focus\ on\ modern\,\ clean\ design.\ The\ background\ features\ subtle\ abstract\ shapes\ and\ light.webp'); /* Substitua pelo caminho da sua imagem */
+    background: url('/background.jpg') no-repeat center center;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,3 +54,30 @@ p {
     background-color: #0056b3;
 }
 
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+    body {
+        background-size: auto 100%;
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
